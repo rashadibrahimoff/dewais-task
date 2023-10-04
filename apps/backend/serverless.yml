@@ -1,4 +1,4 @@
-service: backend
+service: dewais-task-backend
 frameworkVersion: '3'
 
 plugins:
