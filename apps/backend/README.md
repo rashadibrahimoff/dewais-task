@@ -1,48 +1,14 @@
-<!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
 
 
-# Serverless Framework AWS NodeJS Example
+# Run locally
 
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+Requirements
+- Nodejs v18.x installed
+- Serverless framework ^3.52 installed
 
-## Usage
-
-### Deployment
-
-In order to deploy the example, you need to run the following command:
-
-```
-$ serverless deploy
-```
-
-After running deploy, you should see output similar to:
 
 ```bash
-Deploying aws-node-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-node-project-dev (112s)
-
-functions:
-  hello: aws-node-project-dev-hello (1.5 kB)
-```
-
-### Invocation
-
-After successful deployment, you can invoke the deployed function by using the following command:
-
-```bash
-serverless invoke --function hello
+> sls invoke local -f count-words --path ./src/lambdas/count-words/count-words.event.json
 ```
 
 Which should result in response similar to the following:
@@ -50,23 +16,30 @@ Which should result in response similar to the following:
 ```json
 {
     "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": {}\n}"
+    "body": "{\"noun\":1,\"verb\":1,\"adjective\":0,\"adverb\":0,\"preposition\":0,\"conjunction\":0,\"pronoun\":0,\"interjection\":0,\"determiner\":0,\"numeral\":0}"
 }
 ```
 
-### Local development
-
-You can invoke your function locally by using the following command:
+# How to run tests
 
 ```bash
-serverless invoke local --function hello
+> npm test
 ```
 
-Which should result in response similar to the following:
+Covers lambda unit testing
 
+## Test results
+
+![tests screenshot](./tests.png)
+
+# Deployment
+
+Requirements
+- AWS credentials configured
+- Serverless framework ^3.52 installed
+
+```bash
+> sls deploy
 ```
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
-```
+
+Will automatically deploy to dev stage
