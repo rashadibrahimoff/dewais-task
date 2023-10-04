@@ -1,9 +1,25 @@
 service: backend
 frameworkVersion: '3'
 
+plugins:
+  - serverless-esbuild
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    target: node18
+    exclude: ['@aws-sdk']
+    sourcemap: true
+
 provider:
   name: aws
+  region: us-east-1
   runtime: nodejs18.x
+  stage: dev
+  memorySize: 128
+  environment:
+    NODE_OPTIONS: "--enable-source-maps"
 
 functions:
   function1:
