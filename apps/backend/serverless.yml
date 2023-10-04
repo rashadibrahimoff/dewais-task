@@ -3,6 +3,7 @@ frameworkVersion: '3'
 
 plugins:
   - serverless-esbuild
+  - serverless-prune-plugin
 
 custom:
   esbuild:
@@ -11,6 +12,9 @@ custom:
     target: node18
     exclude: ['@aws-sdk']
     sourcemap: true
+  prune:
+    automatic: true
+    number: 3
 
 provider:
   name: aws
