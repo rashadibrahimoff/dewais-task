@@ -22,5 +22,7 @@ provider:
     NODE_OPTIONS: "--enable-source-maps"
 
 functions:
-  function1:
-    handler: index.handler
+  count-words:
+    handler: src/lambdas/count-words/index.handler
+    url:
+      cors: true
